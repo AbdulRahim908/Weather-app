@@ -21,13 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.abdulrahim90.WeatherApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-    
-    ]
+    "plugins": [],
+    "extra": {
+      "eas": {
+        "projectId": "62dbbafe-4964-4d03-8bd0-cc47f1da7b70"
+      }
+    }
   }
 }

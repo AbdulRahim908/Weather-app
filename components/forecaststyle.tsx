@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View ,Image} from 'react-native';
 import { BlurView } from 'expo-blur';
 
 import { WeatherForecast } from '../App';
@@ -9,9 +9,16 @@ import dayjs from 'dayjs';
 import React from 'react';
 const ForecastItem=({forecast}:{forecast:WeatherForecast})=>{
     return(
-        <BlurView intensity={20}  style={styles.container}>
+        <BlurView intensity={5}  style={styles.container}>
+      <View> 
+      <Image  style={{ width: 70, height: 60 }} source={{uri:`https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}}
+      onLoad={() => console.log('Image loaded')}
+      onError={(e) => console.log('Image load error', e.nativeEvent.error)}
+      /> 
+
+       </View>
         <Text style={styles.temp}>{Math.round(forecast.main.temp)}°</Text>
-        <Text style={styles.date}>{dayjs(forecast.dt*1000).format('ddd h a')}</Text>
+        <Text style={styles.date}>{dayjs(forecast.dt*1000).format('ddd   h a')}</Text>
       </BlurView >
 
     );

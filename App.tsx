@@ -13,7 +13,7 @@ import React from 'react';
 
 const Base_url=`https://api.openweathermap.org/data/2.5`;
 const Weather_Api_key=`eba74a3ef7d5ecb8a1c2acf759c1b602`;
-const bgImage='https://images.unsplash.com/photo-1564754943164-e83c08469116?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+// const bgImage=require('./assets/images/sunny.jpg');
 type MainWeather={
   temp: number;
   feels_like: number;
@@ -49,6 +49,14 @@ type Country={
 export type WeatherForecast={
   dt:number;
   main: MainWeather;
+  weather: [
+    {
+      id: number,
+      main: String,
+      description: String,
+      icon: String
+    }
+  ];
 
 }
 
@@ -128,7 +136,7 @@ const  App=()=> {
 
 
   return (
-    <ImageBackground source={{uri:bgImage}} style={styles.container}>
+    <ImageBackground source={weather.weather[0].main === "Rain" ? require('./assets/images/rain.jpg'):require('./assets/images/sunny.jpg')} style={styles.container}>
       <View
         style={{...StyleSheet.absoluteFillObject,
         backgroundColor:'rgba(0,0,0,0.5)'}}
@@ -136,7 +144,7 @@ const  App=()=> {
      {/* <Stack.Screen options={{headerShown:false}} /> */}
      <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
      <View> 
-      <Image  style={{ width: 50, height: 50 }} source={{uri:`https://openweathermap.org/img/w/${weather.weather[0].icon}.png`}}
+      <Image  style={{ width: 130, height: 100 }} source={{uri:`https://openweathermap.org/img/w/${weather.weather[0].icon}.png`}}
       onLoad={() => console.log('Image loaded')}
       onError={(e) => console.log('Image load error', e.nativeEvent.error)}
       /> 
@@ -174,8 +182,7 @@ const styles = StyleSheet.create({
     // fontFamily:'Intersemi',
     fontWeight:'600',
     fontSize:40,
-    color:'white'
-    
+    color:'white',
   },
   temp:{
     fontFamily:'Inter-Black',
@@ -185,7 +192,7 @@ const styles = StyleSheet.create({
   extra:{
     fontSize:25,
     color:'white'
-    ,fontWeight:'300'
+    ,fontWeight:'200'
 
   }
 });
